@@ -17,6 +17,8 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ForceDeleteBulkAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TrashedFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -26,14 +28,17 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $modelLabel = 'Kategória';
+    protected static ?string $pluralModelLabel = 'Kategóriák';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('parent_id')->relationship('parent', 'name')->label('Szülő elem'),
-                TextInput::make('name')->required()->maxLength(255)->label('Megnevezés'),
-                Checkbox::make('is_income')->default(false)->label('Bevétel?'),
+                Select::make('parent_id')->relationship('parent', 'name')->label(__('categories.parent')),
+                TextInput::make('name')->required()->maxLength(255)->label(__('categories.name')),
+                Checkbox::make('is_income')->default(false)->label(__('categories.is_income')),
+                Checkbox::make('is_summary')->default(false)->label(__('categories.is_summary')),
             ]);
     }
 
@@ -41,13 +46,17 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('parent.name'),
-                TextColumn::make('name'),
-                TextColumn::make('created_at')->dateTime(),
-                TextColumn::make('updated_at')->dateTime(),
+                TextColumn::make('parent.name')->label(__('categories.name')),
+                TextColumn::make('name')->label(__('categories.name')),
+                BooleanColumn::make('is_income')->label(__('categories.is_income')),
+                BooleanColumn::make('is_summary')->label(__('categories.is_summary')),
+                TextColumn::make('created_at')->dateTime()->label(__('global.created_at')),
+                TextColumn::make('updated_at')->dateTime()->label(__('global.updated_at')),
             ])
             ->filters([
                 TrashedFilter::make(),
+                Filter::make('is_summary')->query(fn(Builder $query) => $query->where('is_summary', true))->label(__('categories.is_summary')),
+                Filter::make('is_not_summary')->query(fn(Builder $query) => $query->where('is_summary', false))->label(__('categories.is_not_summary')),
             ])
             ->actions([
                 EditAction::make(),

@@ -17,11 +17,9 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             NestedSet::columns($table);
-//            $table->foreignIdFor(\App\Models\Category::class, 'parent_id')->nullable()->constrained('categories');
-//            $table->unsignedInteger('_lft')->nullable();
-//            $table->unsignedInteger('_rgt')->nullable();
             $table->string('name');
             $table->boolean('is_income')->default(false);
+            $table->boolean('is_summary')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
