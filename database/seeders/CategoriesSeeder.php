@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CategoriesSeeder extends Seeder
@@ -46,15 +45,111 @@ class CategoriesSeeder extends Seeder
     {
         Category::query()->firstOrCreate([
             'parent_id' => null,
-            'name' => 'Pénztárca',
+            'name' => 'Pénztárca Ati',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Pénztárca Brigi',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Széf',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Bankszámla Ati',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Bankszámla Brigi',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Revolut',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Mkb ep',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Állampapír',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Babakötvény Nóra',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Babakötvény Maja',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'LTP',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'KBC',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Kripto',
+            'is_income' => true,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Euro',
             'is_income' => true,
             'is_summary' => true,
         ]);
 
         Category::query()->firstOrCreate([
             'parent_id' => null,
-            'name' => 'Bankszámla',
-            'is_income' => true,
+            'name' => 'Babaváró',
+            'is_income' => false,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Imi',
+            'is_income' => false,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Unicredit',
+            'is_income' => false,
+            'is_summary' => true,
+        ]);
+        Category::query()->firstOrCreate([
+            'parent_id' => null,
+            'name' => 'Támogatott',
+            'is_income' => false,
             'is_summary' => true,
         ]);
     }

@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('', fn() => '404');
+Route::get('', fn () => '404');

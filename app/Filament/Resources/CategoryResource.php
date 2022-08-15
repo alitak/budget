@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
@@ -11,13 +10,12 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ForceDeleteBulkAction;
 use Filament\Tables\Actions\RestoreBulkAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TrashedFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,7 +26,9 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
     protected static ?string $modelLabel = 'Kategória';
+
     protected static ?string $pluralModelLabel = 'Kategóriák';
 
     public static function form(Form $form): Form
@@ -55,8 +55,8 @@ class CategoryResource extends Resource
             ])
             ->filters([
                 TrashedFilter::make(),
-                Filter::make('is_summary')->query(fn(Builder $query) => $query->where('is_summary', true))->label(__('categories.is_summary')),
-                Filter::make('is_not_summary')->query(fn(Builder $query) => $query->where('is_summary', false))->label(__('categories.is_not_summary')),
+                Filter::make('is_summary')->query(fn (Builder $query) => $query->where('is_summary', true))->label(__('categories.is_summary')),
+                Filter::make('is_not_summary')->query(fn (Builder $query) => $query->where('is_summary', false))->label(__('categories.is_not_summary')),
             ])
             ->actions([
                 EditAction::make(),
