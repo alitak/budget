@@ -72,22 +72,22 @@ class Summary extends Component
     private function generateValues(): void
     {
         Category::query()
-            ->with(['values' => fn($query) => $query->whereYear('date', $this->year)->whereMonth('date', $this->month)])
+            ->with(['values' => fn ($query) => $query->whereYear('date', $this->year)->whereMonth('date', $this->month)])
             ->summaries()
             ->incomes()
             ->get()
-            ->each(function(Category $category) {
+            ->each(function (Category $category) {
                 $this->values['assets'][$category->id] = [
                     'name' => $category->name,
                     'value' => count($category->values) > 0 ? $category->values[0]->value : 0,
                 ];
             });
         Category::query()
-            ->with(['values' => fn($query) => $query->whereYear('date', $this->year)->whereMonth('date', $this->month)])
+            ->with(['values' => fn ($query) => $query->whereYear('date', $this->year)->whereMonth('date', $this->month)])
             ->summaries()
             ->expenditures()
             ->get()
-            ->each(function(Category $category) {
+            ->each(function (Category $category) {
                 $this->values['depts'][$category->id] = [
                     'name' => $category->name,
                     'value' => count($category->values) > 0 ? $category->values[0]->value : 0,
@@ -96,22 +96,22 @@ class Summary extends Component
 
         $prevDate = Carbon::createFromDate($this->year, $this->month)->subMonth();
         Category::query()
-            ->with(['values' => fn($query) => $query->whereYear('date', $prevDate->year)->whereMonth('date', $prevDate->month)])
+            ->with(['values' => fn ($query) => $query->whereYear('date', $prevDate->year)->whereMonth('date', $prevDate->month)])
             ->summaries()
             ->incomes()
             ->get()
-            ->each(function(Category $category) {
+            ->each(function (Category $category) {
                 $this->previousMonthValues['assets'][$category->id] = [
                     'value' => count($category->values) > 0 ? $category->values[0]->value : 0,
                     'change' => $this->values['assets'][$category->id]['value'] - (count($category->values) > 0 ? $category->values[0]->value : 0),
                 ];
             });
         Category::query()
-            ->with(['values' => fn($query) => $query->whereYear('date', $prevDate->year)->whereMonth('date', $prevDate->month)])
+            ->with(['values' => fn ($query) => $query->whereYear('date', $prevDate->year)->whereMonth('date', $prevDate->month)])
             ->summaries()
             ->expenditures()
             ->get()
-            ->each(function(Category $category) {
+            ->each(function (Category $category) {
                 $this->previousMonthValues['depts'][$category->id] = [
                     'value' => count($category->values) > 0 ? $category->values[0]->value : 0,
                     'change' => (count($category->values) > 0 ? $category->values[0]->value : 0) - (isset($this->values['depts'][$category->id]) ? $this->values['depts'][$category->id]['value'] : 0),

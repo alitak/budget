@@ -19,4 +19,11 @@ class Summary extends Page
     {
         return __('summary.title');
     }
+
+    protected function getBreadcrumbs(): array
+    {
+        return [
+            route('filament.pages.summary') => __('summary.title'),
+        ];
+    }
 }
