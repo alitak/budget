@@ -10,6 +10,8 @@ class Summary extends Page
 
     protected static string $view = 'filament.pages.summary';
 
+    protected static ?int $navigationSort = 30;
+
     protected static function getNavigationLabel(): string
     {
         return __('summary.navigation_label');

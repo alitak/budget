@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'categories' => 'Kategóriák',
+    'category' => 'Kategória',
     'name' => 'Megnevezés',
     'parent' => 'Szülő elem',
     'is_income' => 'Bevétel',

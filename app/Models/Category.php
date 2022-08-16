@@ -122,6 +122,28 @@ class Category extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public static function toSelect(\Illuminate\Database\Eloquent\Collection $data, bool $likeObject = false): array
+    {
+        $options = [];
+        self::traverse($data->toTree(), '', $options, $likeObject);
+
+        return $options;
+    }
+
+    private static function traverse($nodes, $prefix, array &$options, bool $likeObject)
+    {
+        foreach ($nodes as $node) {
+            if ($likeObject) {
+                $options[$node->id] = $prefix.' '.$node->name;
+            } else {
+                $options[] = [
+                    'value' => $node->id,
+                    'label' => $prefix.' '.$node->name,
+                ];
+            }
+            self::traverse($node->children, $prefix.'-', $options, $likeObject);
+        }
+    }
 
     /*
     |--------------------------------------------------------------------------

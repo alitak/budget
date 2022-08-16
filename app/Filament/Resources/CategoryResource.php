@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\Traits\DetermineModelLabels;
+use App\Filament\Resources\Traits\RedirectToIndex;
 use App\Models\Category;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
@@ -23,19 +25,20 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CategoryResource extends Resource
 {
+    use DetermineModelLabels;
+    use RedirectToIndex;
+
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $modelLabel = 'Kategória';
-
-    protected static ?string $pluralModelLabel = 'Kategóriák';
+    protected static ?int $navigationSort = 40;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('parent_id')->relationship('parent', 'name')->label(__('categories.parent')),
+                Select::make('parent_id')->options(Category::toSelect(Category::query()->nonSummaries()->get(), true))->label(__('categories.parent')),
                 TextInput::make('name')->required()->maxLength(255)->label(__('categories.name')),
                 Checkbox::make('is_income')->default(false)->label(__('categories.is_income')),
                 Checkbox::make('is_summary')->default(false)->label(__('categories.is_summary')),
