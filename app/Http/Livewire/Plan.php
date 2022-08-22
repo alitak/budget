@@ -32,6 +32,7 @@ class Plan extends Component
             ->withSum(['budgets' => fn ($query) => $query->active($this->year, $this->month)], 'value')
             ->withSum(['budgetPlans' => fn ($query) => $query->active($this->year, $this->month)], 'value')
             ->nonSummaries()
+            ->orderBy('position')
             ->get()
             ->toTree();
 

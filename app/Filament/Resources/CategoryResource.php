@@ -9,6 +9,7 @@ use App\Models\Category;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -40,8 +41,9 @@ class CategoryResource extends Resource
             ->schema([
                 Select::make('parent_id')->options(Category::toSelect(Category::query()->nonSummaries()->get(), true))->label(__('categories.parent')),
                 TextInput::make('name')->required()->maxLength(255)->label(__('categories.name')),
-                Checkbox::make('is_income')->default(false)->label(__('categories.is_income')),
-                Checkbox::make('is_summary')->default(false)->label(__('categories.is_summary')),
+                TextInput::make('position')->numeric()->label(__('categories.position')),
+                Toggle::make('is_plan')->onIcon('heroicon-s-check-circle')->offIcon('heroicon-s-x-circle')->label(__('categories.is_income')),
+                Toggle::make('is_summary')->onIcon('heroicon-s-check-circle')->offIcon('heroicon-s-x-circle')->label(__('categories.is_summary')),
             ]);
     }
 

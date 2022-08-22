@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('values', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Category::class);
+            $table->foreignIdFor(\App\Models\Category::class)->constrained();
             $table->date('date');
             $table->integer('value');
             $table->timestamps();

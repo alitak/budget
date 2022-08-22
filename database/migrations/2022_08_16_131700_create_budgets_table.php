@@ -16,9 +16,10 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class);
+            $table->foreignIdFor(Category::class)->constrained();
             $table->date('date');
             $table->integer('value');
+            $table->string('description')->nullable();
             $table->boolean('is_plan')->default(false);
             $table->timestamps();
         });

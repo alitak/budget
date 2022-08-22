@@ -36,6 +36,7 @@ class BudgetResource extends Resource
                 Select::make('category_id')->options(Category::toSelect(Category::query()->nonSummaries()->get(), true))->label(__('budgets.category_id')),
                 DatePicker::make('date')->format('Y-m-d')->default(now())->label(__('budgets.date')),
                 TextInput::make('value')->numeric()->label(__('budgets.value')),
+                TextInput::make('description')->label(__('budgets.description')),
                 Toggle::make('is_plan')->onIcon('heroicon-s-map')->offIcon('heroicon-s-cash')->label(__('budgets.is_plan')),
             ]);
     }
@@ -47,6 +48,7 @@ class BudgetResource extends Resource
                 TextColumn::make('category.name')->label(__('categories.name')),
                 TextColumn::make('date')->date()->label(__('budgets.date')),
                 TextColumn::make('value')->money('huf')->label(__('budgets.value')),
+                TextColumn::make('description')->label(__('budgets.description')),
                 BooleanColumn::make('is_plan')->label(__('budgets.is_plan')),
             ])
             ->filters([

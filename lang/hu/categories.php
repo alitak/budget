@@ -8,4 +8,5 @@ return [
     'is_income' => 'Bevétel',
     'is_summary' => 'Összesítő',
     'is_not_summary' => 'Nem összesítő',
+    'position' => 'Sorrend',
 ];

@@ -7,4 +7,5 @@ return [
     'date' => 'Dátum',
     'value' => 'Összeg',
     'is_plan' => 'Terv',
+    'description' => 'Részletek',
 ];
