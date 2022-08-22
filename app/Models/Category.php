@@ -27,6 +27,10 @@ use Kalnoy\Nestedset\QueryBuilder;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Budget[] $budgetPlans
+ * @property-read int|null $budget_plans_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Budget[] $budgets
+ * @property-read int|null $budgets_count
  * @property-read Collection|Category[] $children
  * @property-read int|null $children_count
  * @property-read Category|null $parent
@@ -158,6 +162,16 @@ class Category extends Model
     public function values(): HasMany
     {
         return $this->hasMany(Value::class);
+    }
+
+    public function budgets(): HasMany
+    {
+        return $this->hasMany(Budget::class)->where('is_plan', false);
+    }
+
+    public function budgetPlans(): HasMany
+    {
+        return $this->hasMany(Budget::class)->where('is_plan', true);
     }
 
     /*

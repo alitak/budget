@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Traits\ListenToDateChanged;
 use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -9,6 +10,8 @@ use Livewire\Component;
 
 class Summary extends Component
 {
+    use ListenToDateChanged;
+
     public int $year = 0;
 
     public int $month = 0;
@@ -28,12 +31,6 @@ class Summary extends Component
     protected $listeners = [
         'dateChanged',
     ];
-
-    public function dateChanged(array $values)
-    {
-        $this->year = $values['year'];
-        $this->month = $values['month'];
-    }
 
     public function mount()
     {
@@ -64,8 +61,6 @@ class Summary extends Component
 
         $this->calculateSum();
 
-//        dump($this->values);
-//        dd($this->previousMonthValues);
         return view('livewire.summary');
     }
 
